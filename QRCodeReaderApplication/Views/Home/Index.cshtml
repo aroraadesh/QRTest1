@@ -1,0 +1,21 @@
+﻿<div class="jumbotron">
+    <h1>Welcome to QRCode Generator Applictaion</h1>
+    <p class="lead">Please use api call as below to decode the QR Code.</p>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h2>Getting started</h2>
+        <br />
+        <label> 1. Please create a folder in C drive name as 'temp', this will be used to keep the uploaded file on local location.</label><br>
+        <label> 2. Run the application using Visual Studio.</label><br>
+        <label> 3. API can call from Postman using below details:</label><br>
+        <p>
+            curl --location --request POST 'https://localhost:44364/api/Reader/QRRead' \ 
+            --header 'Content-Type: multipart/form-data' \
+            --form 'file=will be the path of file
+        </p>
+            <label><b>Note: Port number will be different, check the same obove url</b></label>
+
+    </div>
+
+</div>
