@@ -9,3 +9,5 @@
 	request.AddFile("file", "/C:/Users/aarora3/Pictures/Publish/QRCode/TransPerfact.png");
 	IRestResponse response = client.Execute(request);
 	Console.WriteLine(response.Content);
+	
+	Note: Port in API an be changed based on local system.
