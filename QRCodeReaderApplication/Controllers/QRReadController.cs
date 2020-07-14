@@ -32,7 +32,7 @@ namespace QRCodeReaderApplication.Controllers
             var httpRequest = HttpContext.Current.Request;
             try
             {
-                if (ValidateVideoRequest(httpRequest, true).IsSuccessStatusCode)
+                if (ValidateRequest(httpRequest, true).IsSuccessStatusCode)
                 {
                     var postedFile = httpRequest.Files["file"];
                     string filePath = tempFilePath + postedFile.FileName;
@@ -61,7 +61,7 @@ namespace QRCodeReaderApplication.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Method to get QR code Value which is uploaded via API
         /// </summary>
         /// <returns></returns>
         private string GetQRCodeValue(string filePath , string url)
@@ -95,7 +95,13 @@ namespace QRCodeReaderApplication.Controllers
             return QRCodeValue;
         }
 
-        private HttpResponseMessage ValidateVideoRequest(HttpRequest request, bool validateExtention)
+        /// <summary>
+        /// This method to validate the request based on Allowed File Extensions and size of file. 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="validateExtention"></param>
+        /// <returns></returns>
+        private HttpResponseMessage ValidateRequest(HttpRequest request, bool validateExtention)
         {
             var postedFile = request.Files["file"];
             if (postedFile != null && postedFile.ContentLength > 0)
@@ -117,18 +123,21 @@ namespace QRCodeReaderApplication.Controllers
 
         }
 
-
+        /// <summary>
+        /// This Method Write file on Local server location.
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         private Byte[] WriteFileToTempLocation(HttpPostedFile file, string filePath)
         {
             if (null != file && file.ContentLength > 0)
             {
-                // Process file 
                 Stream fs = file.InputStream;
                 BinaryReader br = new BinaryReader(fs);  //reads the   binary files
                 Byte[] bytes = br.ReadBytes((Int32)fs.Length);  //converting file into bytes
                 File.WriteAllBytes(filePath, bytes); //storing file in temp location 
                 return bytes;
-
             }
             return null;
         }
